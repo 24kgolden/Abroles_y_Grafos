@@ -1,17 +1,61 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+/* Árboles Binarios de Búsqueda (BST)
+📌 Un Árbol Binario de Búsqueda (BST) es una estructura donde cada nodo tiene:
+-.Un valor.
+-.Un hijo izquierdo, con valores menores.
+-.Un hijo derecho, con valores mayores.*/
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        ArbolBinario arbol = new ArbolBinario();
+        arbol.insertar(50);
+        arbol.insertar(30);
+        arbol.insertar(70);
+        arbol.insertar(20);
+        arbol.insertar(40);
+        arbol.insertar(60);
+        arbol.insertar(80);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        System.out.print("Recorrido InOrden: ");
+        arbol.inOrden(arbol.raiz);
+    }
+}
+
+class Nodo {
+    int valor;
+    Nodo izquierdo, derecho;
+
+    public Nodo(int item) {
+        valor = item;
+        izquierdo = derecho = null;
+    }
+}
+
+class ArbolBinario {
+    Nodo raiz;
+
+    public void insertar(int valor) {
+        raiz = insertarRec(raiz, valor);
+    }
+
+    private Nodo insertarRec(Nodo raiz, int valor) {
+        if (raiz == null) {
+            return new Nodo(valor);
+        }
+        if (valor < raiz.valor) {
+            raiz.izquierdo = insertarRec(raiz.izquierdo, valor);
+        } else if (valor > raiz.valor) {
+            raiz.derecho = insertarRec(raiz.derecho, valor);
+        }
+        return raiz;
+    }
+
+    public void inOrden(Nodo raiz) {
+        if (raiz != null) {
+            inOrden(raiz.izquierdo);
+            System.out.print(raiz.valor + " ");
+            inOrden(raiz.derecho);
         }
     }
 }
