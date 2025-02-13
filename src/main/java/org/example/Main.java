@@ -58,4 +58,15 @@ class ArbolBinario {
             inOrden(raiz.derecho);
         }
     }
+
+    public boolean buscar(int valor) {
+    return buscarRec(raiz, valor);
 }
+
+private boolean buscarRec(Nodo raiz, int valor) {
+    if (raiz == null) return false;
+    if (raiz.valor == valor) return true;
+    return valor < raiz.valor ? buscarRec(raiz.izquierdo, valor) : buscarRec(raiz.derecho, valor);
+}
+}
+
